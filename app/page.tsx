@@ -137,23 +137,44 @@ export default function RunTracker() {
   return (
     <div className="p-4 md:p-8 max-w-6xl mx-auto bg-slate-50 min-h-screen text-slate-900 font-sans relative">
       
-      {/* HEADER */}
-      <header className="flex justify-between items-center mb-10 px-2">
-        <h1 className="text-2xl font-black italic flex items-center gap-2 tracking-tighter text-slate-800 uppercase leading-none">
-            <Activity className="text-blue-600" strokeWidth={3}/> Race.Flow
-        </h1>
-        <div className="flex gap-2 text-sm">
-          <button onClick={() => setShowRaceForm(true)} className="bg-white border border-slate-200 px-4 py-2 rounded-2xl font-bold text-slate-600 flex items-center gap-2 hover:bg-slate-50 transition-all shadow-sm">
-            <Trophy size={16} className="text-yellow-500" /> <span className="hidden sm:inline">Event</span>
-          </button>
-          <button onClick={() => setIsEditingPlan(!isEditingPlan)} className={`px-4 py-2 rounded-2xl font-bold flex items-center gap-2 transition-all ${isEditingPlan ? 'bg-slate-900 text-white shadow-xl' : 'bg-white border border-slate-200 text-slate-600'}`}>
-            <Settings2 size={16}/> {isEditingPlan ? 'Dashboard' : 'Planer'}
-          </button>
-          <button onClick={() => { setEditingRunId(null); setShowRunForm(true); }} className="bg-blue-600 text-white px-5 py-2 rounded-2xl font-bold shadow-lg shadow-blue-100 active:scale-95 transition-all">
-            <Plus size={18} />
-          </button>
-        </div>
-      </header>
+    {/* OPTIMIERTER HEADER FÜR MOBILE */}
+    <header className="flex justify-between items-center mb-6 md:mb-10 px-1">
+      <h1 className="text-xl md:text-2xl font-black italic flex items-center gap-1.5 tracking-tighter text-slate-800 uppercase leading-none">
+        <Activity className="text-blue-600 w-5 h-5 md:w-6 md:h-6" strokeWidth={3}/> 
+        <span>Race<span className="text-blue-600">.</span>Flow</span>
+      </h1>
+      
+      <div className="flex gap-1.5 md:gap-2 items-center">
+        {/* Event Button */}
+        <button 
+          onClick={() => setShowRaceForm(true)} 
+          className="bg-white border border-slate-200 p-2.5 md:px-4 md:py-2 rounded-xl md:rounded-2xl font-bold text-slate-600 flex items-center gap-2 hover:bg-slate-50 transition-all shadow-sm"
+          title="Wettkampf anlegen"
+        >
+          <Trophy size={18} className="text-yellow-500" /> 
+          <span className="hidden md:inline text-sm">Event</span>
+        </button>
+
+        {/* Planer Button */}
+        <button 
+          onClick={() => setIsEditingPlan(!isEditingPlan)} 
+          className={`p-2.5 md:px-4 md:py-2 rounded-xl md:rounded-2xl font-bold flex items-center gap-2 transition-all ${isEditingPlan ? 'bg-slate-900 text-white shadow-lg' : 'bg-white border border-slate-200 text-slate-600'}`}
+          title="Trainingsplaner"
+        >
+          <Settings2 size={18}/> 
+          <span className="hidden md:inline text-sm">{isEditingPlan ? 'Home' : 'Planer'}</span>
+        </button>
+
+        {/* Plus Button (Immer präsent) */}
+        <button 
+          onClick={() => { setEditingRunId(null); setShowRunForm(true); }} 
+          className="bg-blue-600 text-white p-2.5 md:px-5 md:py-2 rounded-xl md:rounded-2xl font-bold shadow-lg shadow-blue-100 active:scale-95 transition-all flex items-center justify-center"
+          title="Lauf loggen"
+        >
+          <Plus size={20} />
+        </button>
+      </div>
+    </header>
 
       {/* MODAL: RUN LOGGEN */}
       {showRunForm && (
